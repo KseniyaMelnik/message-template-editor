@@ -4,6 +4,7 @@ import s from './styles.module.scss'
 
 import { EditElementType } from 'entities/edit-elements-list'
 import { ToggleShowEditor } from 'features/toggle-show-editor'
+import { Toast } from 'shared/ui/toast'
 import { MessageTemplateEditor } from 'widgets/message-template-editor'
 
 const arrVarNames = localStorage.arrVarNames
@@ -15,7 +16,17 @@ const template = localStorage.template ? JSON.parse(localStorage.template) : nul
 const callbackSave = async (template: EditElementType[]) => {
   const stringTemplate = JSON.stringify(template)
 
-  localStorage.setItem('template', stringTemplate)
+  try {
+    localStorage.setItem('template', stringTemplate)
+
+    return <Toast text={'Success'} />
+    // показываем сообщение об успешном сохранении данных
+    //showSuccessMessage('Данные успешно сохранены в localStorage')
+  } catch (error) {
+    // показываем сообщение об ошибке
+    //showErrorMessage('Не удалось сохранить данные в localStorage')
+    console.error(error)
+  }
 }
 
 export const MessageEditor = () => {
