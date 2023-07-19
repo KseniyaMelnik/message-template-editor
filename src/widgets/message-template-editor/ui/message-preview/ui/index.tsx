@@ -26,8 +26,6 @@ export const MessagePreview: FC<MessagePreviewProps> = ({ arrVarNames, template 
   const [text, setText] = useState('')
   const [varObj, setVarObj] = useState<Record<ArrVarNamesType[number], string>>(initObj)
 
-  console.log(varObj)
-
   useEffect(() => {
     const text = generateMessage(template, varObj)
 

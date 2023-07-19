@@ -40,6 +40,8 @@ export const MessageTemplateEditor = ({
     }
   }, [])
 
+  const onCloseModal = () => setShowModal(false)
+
   return (
     <div className={s.container}>
       <h2 className={s.title}>Message Template Editor</h2>
@@ -75,7 +77,7 @@ export const MessageTemplateEditor = ({
         <ToggleShowEditor showEditor={showEditor} setShowEditor={setShowEditor} />
       </div>
       {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
+        <Modal onClose={onCloseModal} showModal={showModal}>
           <MessagePreview arrVarNames={arrVarNames} template={blocks} />
         </Modal>
       )}

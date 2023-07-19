@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import s from './styles.module.scss'
+
 import { EditElementType } from 'entities/edit-elements-list'
 import { ToggleShowEditor } from 'features/toggle-show-editor'
 import { MessageTemplateEditor } from 'widgets/message-template-editor'
@@ -30,7 +32,10 @@ export const MessageEditor = () => {
           setShowEditor={setShowEditor}
         />
       ) : (
-        <ToggleShowEditor showEditor={showEditor} setShowEditor={setShowEditor} />
+        <div className={s.container}>
+          <p>Click to open</p>
+          <ToggleShowEditor showEditor={showEditor} setShowEditor={setShowEditor} />
+        </div>
       )}
     </>
   )
