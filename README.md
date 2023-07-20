@@ -2,7 +2,7 @@
 
 Message template editor and message preview widget.
 
-Check out the [Live Demo]()
+Check out the [Live Demo](https://message-template-editor-three.vercel.app/)
 
 In the project directory, you can run:
 
