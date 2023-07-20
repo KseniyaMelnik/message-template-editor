@@ -67,7 +67,7 @@ export const EditElementsList: FC<EditElementsListPropsType> = ({
     <div className={s.container}>
       {blocks.map((block, index) => (
         <EditElement
-          key={index}
+          key={index + `${blocks.length}`}
           handleDeleteBlock={() => handleDeleteBlock(index)}
           block={block}
           handleVariable={handleVariable}

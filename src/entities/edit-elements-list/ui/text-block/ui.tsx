@@ -20,6 +20,7 @@ export const TextBlock: FC<TextBlockPropsType> = ({
   handleIfThenElse,
   focus,
 }) => {
+  //слушаем нажатие на кнопки переменных
   const variableHandler = (event: FocusEvent<HTMLTextAreaElement>) => (text: string) => {
     const selectionStart = event.target.selectionStart
     const selectionEnd = event.target.selectionEnd
@@ -28,7 +29,7 @@ export const TextBlock: FC<TextBlockPropsType> = ({
 
     onUpdateBlock({ type: 'text', value: newValue })
   }
-
+  //слушаем нажатие на кнопку 'if-then-else'
   const ifThenElseHandler = (event: FocusEvent<HTMLTextAreaElement>) => () => {
     const selectionStart = event.target.selectionStart
     const selectionEnd = event.target.selectionEnd
@@ -45,6 +46,7 @@ export const TextBlock: FC<TextBlockPropsType> = ({
     onUpdateBlock({ type: 'text', value: newValue })
   }
 
+  //на фокус textarea вешаем обработчики нажатий на кнопки переменных и кнопки if-then-else
   const handleTextareaFocusCombined = (event: FocusEvent<HTMLTextAreaElement>) => {
     handleVariable(() => variableHandler(event))
     handleIfThenElse(() => ifThenElseHandler(event))

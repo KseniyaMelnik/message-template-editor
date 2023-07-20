@@ -21,6 +21,7 @@ export const SaveTemplate: FC<SaveTemplateProps> = ({ template, callbackSave }) 
     } finally {
       setTimeoutId(
         setTimeout(() => {
+          //через 3 секунды очищаем сообщение для того чтобы показать следующее в случае повторного нажатия на кнопку
           setMessage('')
         }, 3000)
       )

@@ -35,6 +35,7 @@ export const MessageEditor = () => {
       ) : (
         <div className={s.container}>
           <p>Click to open</p>
+          <p className={s.arrow}>&#129095;</p>
           <ToggleShowEditor showEditor={showEditor} setShowEditor={setShowEditor} />
         </div>
       )}

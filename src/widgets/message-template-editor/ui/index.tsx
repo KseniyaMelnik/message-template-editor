@@ -28,7 +28,7 @@ export const MessageTemplateEditor = ({
 }: MessageEditorProps) => {
   const [clickVariable, setClickVariable] = useState<(val: string) => void>(() => () => {})
   const [clickIfThenElse, setIfThenElse] = useState<() => void>(() => () => {})
-
+  // если нет сохраненного шаблона, то показываем первую textarea
   const [blocks, setBlocks] = useState<EditElementType[]>(template || [{ type: 'text', value: '' }])
 
   const [showModal, setShowModal] = useState(false)
