@@ -69,7 +69,7 @@ export const IfThenElseBlock: FC<IfThenElseBlockPropsType> = ({
           <span className={s.if}>If</span>
           <EditElementsList
             blocks={ifBranch}
-            onUpdateBlock={handleIfBranchUpdate}
+            setBlocks={handleIfBranchUpdate}
             handleVariable={handleVariable}
             handleIfThenElse={handleIfThenElse}
           />
@@ -78,7 +78,7 @@ export const IfThenElseBlock: FC<IfThenElseBlockPropsType> = ({
           <span className={s.then}>Then</span>
           <EditElementsList
             blocks={thenBranch}
-            onUpdateBlock={handleThenBranchUpdate}
+            setBlocks={handleThenBranchUpdate}
             handleVariable={handleVariable}
             handleIfThenElse={handleIfThenElse}
           />
@@ -87,7 +87,7 @@ export const IfThenElseBlock: FC<IfThenElseBlockPropsType> = ({
           <span className={s.else}>Else</span>
           <EditElementsList
             blocks={elseBranch}
-            onUpdateBlock={handleElseBranchUpdate}
+            setBlocks={handleElseBranchUpdate}
             handleVariable={handleVariable}
             handleIfThenElse={handleIfThenElse}
           />

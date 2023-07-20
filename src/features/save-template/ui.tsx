@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import { createPortal } from 'react-dom'
 
 import { EditElementType } from 'entities/edit-elements-list'
-import { Button } from 'shared/ui/button/ui'
+import { Button } from 'shared/ui/button'
 import { Toast } from 'shared/ui/toast'
 
 type SaveTemplateProps = {
@@ -14,7 +14,7 @@ export const SaveTemplate: FC<SaveTemplateProps> = ({ template, callbackSave }) 
   const onSave = () => {
     try {
       callbackSave(template)
-      if (timeoutId) clearTimeout(timeoutId) // очистить таймаут
+      if (timeoutId) clearTimeout(timeoutId) // очищаем таймаут если он есть
       setMessage('Template successfully saved')
     } catch {
       setMessage('Something went wrong')
@@ -31,8 +31,10 @@ export const SaveTemplate: FC<SaveTemplateProps> = ({ template, callbackSave }) 
 
   return (
     <>
-      <Button onClick={onSave}>Save</Button>
-      {message && createPortal(<Toast text={message} />, document.body)}
+      <Button onClick={onSave} disabled={!!message}>
+        &#128190; Save
+      </Button>
+      {!!message && createPortal(<Toast text={message} />, document.body)}
     </>
   )
 }

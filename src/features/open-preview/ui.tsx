@@ -9,7 +9,7 @@ type OpenPreviewProps = {
 export const OpenPreview: FC<OpenPreviewProps> = ({ setShowModal }) => {
   return (
     <>
-      <Button onClick={() => setShowModal(true)}>Preview</Button>
+      <Button onClick={() => setShowModal(true)}>&#128187; Preview</Button>
     </>
   )
 }

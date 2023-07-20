@@ -2,6 +2,7 @@
 export type TextBlockType = {
   type: 'text'
   value: string
+  focus?: boolean
 }
 
 export type IfThenElseBlockType = {

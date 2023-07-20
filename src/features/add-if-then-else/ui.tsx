@@ -2,9 +2,9 @@ import { FC } from 'react'
 
 import { Button } from 'shared/ui/button/ui'
 
-type IfThenElseProps = {
+type AddIfThenElseProps = {
   clickIfThenElse: () => void
 }
-export const IfThenElse: FC<IfThenElseProps> = ({ clickIfThenElse }) => {
+export const AddIfThenElse: FC<AddIfThenElseProps> = ({ clickIfThenElse }) => {
   return <Button onClick={clickIfThenElse}> IF-THEN-ELSE</Button>
 }

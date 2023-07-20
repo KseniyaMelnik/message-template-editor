@@ -4,7 +4,7 @@ import s from './styles.module.scss'
 
 import { EditElementType } from 'entities/edit-elements-list'
 import { Preview } from 'entities/preview/ui'
-import { generateMessage } from 'features/generateMessage'
+import { generateMessage } from 'features/generate-message'
 import { VarFields } from 'features/var-fields'
 
 type MessagePreviewProps = {

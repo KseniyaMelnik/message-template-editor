@@ -10,6 +10,7 @@ export type TextBlockPropsType = {
   onUpdateBlock: (newBlock: TextBlockType) => void
   handleVariable: Dispatch<SetStateAction<(val: string) => void>>
   handleIfThenElse: Dispatch<SetStateAction<() => void>>
+  focus?: boolean
 }
 export const TextBlock: FC<TextBlockPropsType> = ({
   value,
@@ -17,6 +18,7 @@ export const TextBlock: FC<TextBlockPropsType> = ({
   onSeparateBlocks,
   handleVariable,
   handleIfThenElse,
+  focus,
 }) => {
   const variableHandler = (event: FocusEvent<HTMLTextAreaElement>) => (text: string) => {
     const selectionStart = event.target.selectionStart
@@ -49,6 +51,11 @@ export const TextBlock: FC<TextBlockPropsType> = ({
   }
 
   return (
-    <Textarea value={value} onChange={handleTextChange} onFocus={handleTextareaFocusCombined} />
+    <Textarea
+      focus={focus}
+      value={value}
+      onChange={handleTextChange}
+      onFocus={handleTextareaFocusCombined}
+    />
   )
 }

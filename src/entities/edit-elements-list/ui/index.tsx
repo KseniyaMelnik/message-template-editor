@@ -5,15 +5,15 @@ import { EditElementsListType, EditElementType } from '../model'
 import { EditElement } from './edit-element'
 import s from './styles.module.scss'
 
-type BlockListPropsType = {
+type EditElementsListPropsType = {
   blocks: EditElementsListType
-  onUpdateBlock: (newBlocks: EditElementsListType) => void
+  setBlocks: (newBlocks: EditElementsListType) => void
   handleVariable: Dispatch<SetStateAction<(val: string) => void>>
   handleIfThenElse: Dispatch<SetStateAction<() => void>>
 }
-export const EditElementsList: FC<BlockListPropsType> = ({
+export const EditElementsList: FC<EditElementsListPropsType> = ({
   blocks,
-  onUpdateBlock,
+  setBlocks,
   handleVariable,
   handleIfThenElse,
 }) => {
@@ -22,7 +22,7 @@ export const EditElementsList: FC<BlockListPropsType> = ({
 
     newBlocks[index] = newBlock
 
-    onUpdateBlock(newBlocks)
+    setBlocks(newBlocks)
   }
   const handleSeparateBlocks = (
     index: number,
@@ -37,13 +37,14 @@ export const EditElementsList: FC<BlockListPropsType> = ({
       updatedBlock,
       {
         type: 'if-then-else',
-        ifBranch: [{ type: 'text', value: '' }],
+        ifBranch: [{ type: 'text', value: '', focus: true }], // устанавливаем фокус внутрь блока if
         thenBranch: [{ type: 'text', value: '' }],
         elseBranch: [{ type: 'text', value: '' }],
       },
       addedBlock
     )
-    onUpdateBlock(newBlocks)
+
+    setBlocks(newBlocks)
   }
 
   const handleDeleteBlock = (index: number) => {
@@ -59,7 +60,7 @@ export const EditElementsList: FC<BlockListPropsType> = ({
     }
 
     newBlocks.splice(index - 1, 3, { type: 'text', value: textValue })
-    onUpdateBlock(newBlocks)
+    setBlocks(newBlocks)
   }
 
   return (

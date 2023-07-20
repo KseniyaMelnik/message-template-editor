@@ -4,7 +4,7 @@ import { MessagePreview } from './message-preview'
 import s from './styles.module.scss'
 
 import { EditElementsList, EditElementType } from 'entities/edit-elements-list'
-import { IfThenElse } from 'features/if-then-else'
+import { AddIfThenElse } from 'features/add-if-then-else'
 import { OpenPreview } from 'features/open-preview'
 import { SaveTemplate } from 'features/save-template'
 import { ToggleShowEditor } from 'features/toggle-show-editor'
@@ -29,10 +29,13 @@ export const MessageTemplateEditor = ({
   const [clickVariable, setClickVariable] = useState<(val: string) => void>(() => () => {})
   const [clickIfThenElse, setIfThenElse] = useState<() => void>(() => () => {})
 
-  const [blocks, setBlocks] = useState<EditElementType[]>(template || [])
+  const [blocks, setBlocks] = useState<EditElementType[]>(template || [{ type: 'text', value: '' }])
+
   const [showModal, setShowModal] = useState(false)
 
   useLayoutEffect(() => {
+    // устанавливаем фокус в первую textarea, чтобы после загрузки страницы при клике по кнопке переменной
+    // или if-then-else взаимодействовать именно с ней
     const firstTextarea = document.querySelector('textarea')
 
     if (firstTextarea) {
@@ -53,10 +56,12 @@ export const MessageTemplateEditor = ({
 
       <div>
         <span className={s.description}>
-          Click to add: if [{'some_variable'} or expression] then [then_value] else [else_value]
+          Click to add: <span className={s.if}>if</span> [{'some_variable'} or expression]{' '}
+          <span className={s.then}>then</span> [then_value] <span className={s.else}>else</span>{' '}
+          [else_value]
         </span>
         <div>
-          <IfThenElse clickIfThenElse={clickIfThenElse} />
+          <AddIfThenElse clickIfThenElse={clickIfThenElse} />
         </div>
       </div>
       <div>
@@ -64,7 +69,7 @@ export const MessageTemplateEditor = ({
         <div className={s.template}>
           <EditElementsList
             blocks={blocks}
-            onUpdateBlock={setBlocks}
+            setBlocks={setBlocks}
             handleVariable={setClickVariable}
             handleIfThenElse={setIfThenElse}
           />

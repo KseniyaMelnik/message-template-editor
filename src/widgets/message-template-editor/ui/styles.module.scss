@@ -4,7 +4,7 @@
   gap: 1rem;
 
   width: 90%;
-  margin: 0 auto;
+  margin: 0 auto 5rem;
   padding: 1rem;
 }
 
@@ -27,4 +27,16 @@
 .controls {
   display: flex;
   gap: 1rem;
+}
+
+.if {
+  color: var(--color-accent-500);
+}
+
+.then {
+  color: var(--color-success-500);
+}
+
+.else {
+  color: var(--color-danger-300);
 }

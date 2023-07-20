@@ -17,7 +17,7 @@ describe('generateMessage', () => {
     expect(generateMessage(template, values)).toEqual('Hello, world!')
   })
 
-  it('should return an empty string when given a template with only if-then-else blocks and values', () => {
+  it('should return an empty string when given a template with only add-if-then-else blocks and values', () => {
     const template: EditElementsListType = [
       {
         type: 'if-then-else',
@@ -38,7 +38,7 @@ describe('generateMessage', () => {
     expect(generateMessage(template, values)).toEqual('Hello, John!')
   })
 
-  it('should correctly evaluate nested if-then-else blocks when given a template with nested if-then-else blocks and values containing variables', () => {
+  it('should correctly evaluate nested add-if-then-else blocks when given a template with nested add-if-then-else blocks and values containing variables', () => {
     const template: EditElementsListType = [
       {
         type: 'text',
@@ -50,6 +50,7 @@ describe('generateMessage', () => {
           {
             type: 'text',
             value: '{company}',
+            focus: true,
           },
         ],
         thenBranch: [

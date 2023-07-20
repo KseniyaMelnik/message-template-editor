@@ -29,6 +29,7 @@ export const EditElement: FC<EditElementPropsType> = ({
           value={block.value}
           onUpdateBlock={onUpdateBlock as (newBlock: TextBlockType) => void}
           onSeparateBlocks={onSeparateBlocks}
+          focus={block.focus}
         />
       )
     case 'if-then-else':
