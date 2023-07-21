@@ -59,7 +59,7 @@ export const EditElementsList: FC<EditElementsListPropsType> = ({
       textValue = blockBeforeIdx.value + blockAfterIdx.value
     }
 
-    newBlocks.splice(index - 1, 3, { type: 'text', value: textValue })
+    newBlocks.splice(index - 1, 3, { type: 'text', value: textValue, focus: true })
     setBlocks(newBlocks)
   }
 

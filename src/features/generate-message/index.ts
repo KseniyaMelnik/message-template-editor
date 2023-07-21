@@ -2,23 +2,28 @@ import { EditElementsListType } from 'entities/edit-elements-list'
 
 type ValuesType = Record<string, string>
 
-export function generateMessage(template: EditElementsListType, values: ValuesType): string {
+export const generateMessage = (template: EditElementsListType, values: ValuesType): string => {
+  const message = getMessage(template, values)
+
+  return replaceValues(message, values)
+}
+export function getMessage(template: EditElementsListType, values: ValuesType): string {
   let message = ''
 
   for (const block of template) {
     if (block.type === 'text') {
       message += block.value
     } else if (block.type === 'if-then-else') {
-      const ifValue = getBlockValue(block.ifBranch, values)
+      const ifValue = getBlockValue(block.ifBranch, values) //проверяем, исполняется ли блок if
       const branch = ifValue ? block.thenBranch : block.elseBranch
 
       if (branch) {
-        message += generateMessage(branch, values)
+        message += getMessage(branch, values)
       }
     }
   }
 
-  return replaceValues(message, values)
+  return message
 }
 
 function getBlockValue(blocks: EditElementsListType | undefined, values: ValuesType): string {
@@ -36,20 +41,30 @@ function getBlockValue(blocks: EditElementsListType | undefined, values: ValuesT
       const branch = ifValue ? block.thenBranch : block.elseBranch
 
       if (branch) {
-        value += generateMessage(branch, values)
+        value += getMessage(branch, values)
       }
     }
   }
 
-  return replaceValues(value, values)
+  return getResultIfValue(value, values)
 }
 
-function replaceValues(value: string, values: ValuesType): string {
+function getResultIfValue(value: string, values: ValuesType): string {
+  let result = value
+
   for (const [name, val] of Object.entries(values)) {
     const pattern = new RegExp(`{${name}}`, 'g')
 
-    value = value.replace(pattern, val)
+    if (val === '') {
+      result = result.replace(pattern, '')
+    }
   }
 
-  return value
+  return result
+}
+
+function replaceValues(value: string, values: ValuesType): string {
+  return value.replace(/{([^{}]+)}/g, (match, name) => {
+    return values[name] === undefined ? match : values[name]
+  })
 }

@@ -121,3 +121,80 @@ describe('generateMessage', () => {
     )
   })
 })
+
+it('should correctly replace values in text if entered values are the same as variable names', () => {
+  const template: EditElementsListType = [
+    {
+      type: 'text',
+      value: 'Hello, {firstname}! ',
+    },
+    {
+      type: 'if-then-else',
+      ifBranch: [
+        {
+          type: 'text',
+          value: '{company}',
+          focus: true,
+        },
+      ],
+      thenBranch: [
+        {
+          type: 'text',
+          value: 'I know you work at {company}',
+        },
+        {
+          type: 'if-then-else',
+          ifBranch: [
+            {
+              type: 'text',
+              value: '{position}',
+            },
+          ],
+          thenBranch: [
+            {
+              type: 'text',
+              value: ' as {position}',
+            },
+          ],
+          elseBranch: [
+            {
+              type: 'text',
+              value: ' , but what is your role? ',
+            },
+          ],
+        },
+        {
+          type: 'text',
+          value: ':)',
+        },
+      ],
+      elseBranch: [
+        {
+          type: 'text',
+          value: 'Where do you work at the moment?',
+        },
+      ],
+    },
+    {
+      type: 'text',
+      value: '',
+    },
+  ]
+  const values = { firstname: 'John', company: 'Inno Menu', position: '{firstname}' }
+
+  expect(generateMessage(template, values)).toEqual(
+    'Hello, John! I know you work at Inno Menu as {firstname}:)'
+  )
+
+  const values2 = { firstname: '{lastname}', company: '' }
+
+  expect(generateMessage(template, values2)).toEqual(
+    'Hello, {lastname}! Where do you work at the moment?'
+  )
+
+  const values3 = { firstname: '{lastname}', company: '{firstname}', position: '' }
+
+  expect(generateMessage(template, values3)).toEqual(
+    'Hello, {lastname}! I know you work at {firstname} , but what is your role? :)'
+  )
+})
